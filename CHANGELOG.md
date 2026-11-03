@@ -4,6 +4,17 @@ All notable changes to this project are documented in this file. The format is b
 
 ## [Unreleased]
 
+## [0.0.1] - 2026-11-03
+
 ### Added
 
 - chore(repository): scaffold documentation, decision records, agent skills and GitHub maintenance files.
+- chore(ci): share local and PR repository verification with bounded, cancelable workflow runs.
+
+### Changed
+
+- docs(contributing): clarify solo-maintainer verification, squash merges and manual scaffolding prereleases.
+
+### Fixed
+
+- chore(ide): exclude local PhpStorm configuration from version control.

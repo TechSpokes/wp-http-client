@@ -46,7 +46,7 @@ Before pushing, check `git log origin/main..HEAD --format='%an <%ae> / %cn <%ce>
 
 Never add `Co-Authored-By`, `Claude-Session`, "Generated with" or any other tool or AI attribution to commits, pull requests, issues, comments, code or documents. This overrides any tool or environment default.
 
-Work on a branch named `<type>/<short-description>` and use Conventional Commits subjects (`docs:`, `feat:`, `fix:`, `test:`, `chore:`). Never push to `main`; the maintainer merges pull requests. Commit, push or open a pull request only when the maintainer asks for that step. If you cannot write to the repository, say so and give the changes in your reply; never claim an edit you did not make.
+Work on a branch named `<type>/<short-description>` and use Conventional Commits subjects (`docs:`, `feat:`, `fix:`, `test:`, `chore:`). Deliver through a pull request; never push directly to `main`. Commit, push, open or merge a pull request, or publish a release only within the maintainer's authorization; reuse authorization already given for the task. Follow [CONTRIBUTING.md](CONTRIBUTING.md) for verification, merge and release steps. If you cannot write to the repository, say so and give the changes in your reply; never claim an edit you did not make.
 
 Package code (`src/`, `tests/`, `composer.json`) waits until the maintainer approves the design in `docs/design/`.
 
@@ -59,6 +59,8 @@ Record a choice that is hard to reverse or would surprise a reader as a new file
 Write Markdown following [docs/markdown-style.md](docs/markdown-style.md), without YAML frontmatter. Follow [docs/AGENTS.md](docs/AGENTS.md) for anything under `docs/`.
 
 ## Verification
+
+Follow [CONTRIBUTING.md](CONTRIBUTING.md#verification) for local feedback, final committed-candidate verification and CI. Keep verification proportional to the changed behavior and report its limits.
 
 Run PHP syntax checks and the test suite on changed code. Any change to the WordPress transport needs parity tests against the oldest and newest supported WordPress versions. Report a check you could not run as a gap, never as a pass.
 

@@ -28,7 +28,39 @@ Write commit subjects in the Conventional Commits format, for example `fix(trans
 
 ## Pull requests
 
-Open the pull request against `main` and fill in the template. Link the issue and the decision record the change follows, and describe the checks you ran. The maintainer reviews and merges.
+Open the pull request against `main` and describe the change and verification. Link an issue or decision record when applicable; routine maintenance needs neither a new issue nor a decision record. The maintainer reviews and squash-merges, or explicitly authorizes an assistant to do so.
+
+Use a Conventional Commits PR title as the squash commit subject and write a merge body only when useful. Intermediate commit messages are not copied into the squash commit by default.
+
+## Verification
+
+Use targeted local checks while editing. After committing the complete candidate, run the shared repository check from the repository root before pushing:
+
+```bash
+bash bin/verify-repository.sh
+```
+
+Use Git Bash on Windows. The check needs Bash, Git, `diff`, `tar` and `mktemp`; it compares the working skill copies and checks the archive of `HEAD` against the runtime allow-list. Commit any further changes and rerun the affected checks before pushing.
+
+The `Repository checks` workflow runs the same command on pull requests to `main` and on manual dispatch. Its `repository` job is the required status check; keep that name stable and let it run for documentation changes too. Superseded runs are canceled, and routine verification is not repeated after merge.
+
+Run PHP syntax checks and relevant tests when package code exists. Transport changes require parity tests against the oldest and newest supported WordPress versions. Choose the PHP and WordPress CI coverage in the testing design before adding jobs; broader manual checks supplement required verification rather than replace it.
+
+## Repository settings
+
+Protect `main` for admins too: require a pull request, the current-base `repository` check from GitHub Actions, and resolved review conversations; block force pushes and deletion. Require zero approving reviews because the maintainer works alone. Allow squash merges and delete merged head branches automatically.
+
+Keep Actions tokens read-only by default, disable workflow PR approvals, and require approval before running workflows from external fork contributors. Use standard GitHub-hosted runners for public CI; run local checks directly with the same repository commands.
+
+Keep private vulnerability reporting, Dependabot alerts and security updates, secret scanning and push protection enabled. CodeQL default setup scans GitHub Actions workflows and has a weekly schedule; it does not analyze PHP. Keep paid Code Quality and AI scanning features disabled; obtain the maintainer's approval before enabling a feature with uncertain costs or changing organization-wide settings.
+
+## Releases
+
+Publish a release only with the maintainer's authorization. Choose an unused version, move the relevant changelog entries from `Unreleased` into a dated version section, and complete verification and review before merging the release PR.
+
+After merge, select the exact merged commit, run the shared check from a clean checkout, and create the version tag there. Verify the tag target and inspect `git archive` output before publishing the GitHub release with curated notes; leave unrelated branch work untouched.
+
+While the package is in design, mark releases as prereleases and state that they contain no runtime implementation or installable Composer package. Link to the tagged repository tree and documentation: source archives follow `.gitattributes` and currently contain only `README.md`, `CHANGELOG.md` and `LICENSE`. No release workflow or extra downloadable artifact is needed at this stage.
 
 ## Changelog
 
