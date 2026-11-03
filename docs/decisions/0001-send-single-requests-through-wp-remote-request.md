@@ -1,12 +1,6 @@
----
-status: proposed
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Migrated from D1 in docs/decisions.md.
----
-
 # Send single requests through wp_remote_request()
+
+Status: proposed.
 
 ## Context and problem
 

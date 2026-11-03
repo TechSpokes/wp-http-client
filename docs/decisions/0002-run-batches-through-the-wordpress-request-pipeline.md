@@ -1,12 +1,6 @@
----
-status: proposed
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Migrated from D2 in docs/decisions.md, with the batch-mode gaps found on 2026-11-03.
----
-
 # Run batches through the WordPress request pipeline
+
+Status: proposed.
 
 ## Context and problem
 

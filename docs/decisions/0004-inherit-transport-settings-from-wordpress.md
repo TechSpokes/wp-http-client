@@ -1,12 +1,6 @@
----
-status: proposed
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Migrated from D4 in docs/decisions.md, with the connect timeout limit and the exception from 0003.
----
-
 # Inherit transport settings from WordPress
+
+Status: proposed.
 
 ## Context and problem
 

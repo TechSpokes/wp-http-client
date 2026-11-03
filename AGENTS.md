@@ -1,11 +1,3 @@
----
-status: current
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Initial operating rules for people and AI assistants working on the package.
----
-
 # wp-http-client Agent Instructions
 
 This repository builds `techspokes/wp-http-client`, a public Composer package that gives WordPress plugins and themes an HTTP client running on the WordPress HTTP API, with parallel requests, retries, logging with redaction, decoding, response mapping, streaming and PSR-18 compatibility. These rules apply to every assistant (Claude, ChatGPT, Codex or others) and to people.
@@ -15,6 +7,16 @@ This repository builds `techspokes/wp-http-client`, a public Composer package th
 Read [docs/README.md](docs/README.md) before changing code or design. It maps the scope, glossary, decisions, design and research. [docs/repository-structure.md](docs/repository-structure.md) says where every kind of file lives and how it is named.
 
 The package is general purpose. TechSpokes plugins and earlier clients are evidence of the problem, not the design target; never shape the public API around one plugin.
+
+## Scoped instructions
+
+Some folders have their own `AGENTS.md` with rules for that folder only, next to a one-line `CLAUDE.md` that imports it. Before reading or changing files in a folder, read every `AGENTS.md` between the repository root and that folder; the deeper file adds to this one. Today [docs/AGENTS.md](docs/AGENTS.md) covers all documentation.
+
+## Only current information
+
+The files at the current commit are the single source of truth, and every reader must be able to treat what they read as authoritative. When something changes, update, replace or delete the affected text in the same commit; do not keep superseded versions, "previously" notes, migration tables or dated history inside files.
+
+Git history keeps the past. Read `git log --follow -p -- <file>` when you need to know how something evolved. `CHANGELOG.md` is the one exception: it records released changes for package users.
 
 ## Guiding principle
 
@@ -50,11 +52,11 @@ Package code (`src/`, `tests/`, `composer.json`) waits until the maintainer appr
 
 ## Decisions
 
-Record a choice that is hard to reverse or would surprise a reader as a new file in [docs/decisions/](docs/decisions/README.md) with status `proposed`. Only the maintainer sets `accepted`, `rejected` or `deprecated`. Ask before anything public or hard to reverse, such as a release, the package name or the license. Settle technical questions yourself when you can; when you must ask, give the context, the options with their impact and blast radius, your recommendation and why it beats the others.
+Record a choice that is hard to reverse or would surprise a reader as a new file in [docs/decisions/](docs/decisions/README.md) with status `proposed`. Only the maintainer sets `accepted`. When a decision changes, edit its record in place; never add a superseding record. Ask before anything public or hard to reverse, such as a release, the package name or the license. Settle technical questions yourself when you can; when you must ask, give the context, the options with their impact and blast radius, your recommendation and why it beats the others.
 
 ## Documentation
 
-Write Markdown following [docs/markdown-style.md](docs/markdown-style.md). Documents in `docs/` and this file carry YAML frontmatter with `status`, `updated` and `history`. Keep documents current in place; Git history keeps old versions.
+Write Markdown following [docs/markdown-style.md](docs/markdown-style.md), without YAML frontmatter. Follow [docs/AGENTS.md](docs/AGENTS.md) for anything under `docs/`.
 
 ## Verification
 

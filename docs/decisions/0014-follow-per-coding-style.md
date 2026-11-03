@@ -1,12 +1,6 @@
----
-status: proposed
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Proposed.
----
-
 # Follow PER Coding Style
+
+Status: proposed.
 
 ## Context and problem
 

@@ -1,12 +1,6 @@
----
-status: proposed
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Migrated from D3 in docs/decisions.md, resolving the conflict with D4 over explicit arguments.
----
-
 # Let the site decide unsafe URL rejection
+
+Status: proposed.
 
 ## Context and problem
 

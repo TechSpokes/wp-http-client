@@ -1,11 +1,3 @@
----
-status: review
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Differences between Requests batch mode and single requests, read from the Requests 2.0.21 source.
----
-
 # Requests batch-mode gaps
 
 `Requests::request_multiple()` does not behave like `Requests::request()` in five ways that matter for parity with `wp_remote_request()`. How the package handles each gap is decided in the design.

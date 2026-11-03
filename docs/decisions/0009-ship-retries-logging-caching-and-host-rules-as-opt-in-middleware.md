@@ -1,12 +1,6 @@
----
-status: proposed
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Migrated from D9 in docs/decisions.md.
----
-
 # Ship retries, logging, caching and host rules as opt-in middleware
+
+Status: proposed.
 
 ## Context and problem
 

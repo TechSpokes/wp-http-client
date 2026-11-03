@@ -1,11 +1,3 @@
----
-status: review
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Where the domain documentation lives, for the domain modeling skills.
----
-
 # Domain docs
 
 How the engineering skills find and use this repository's domain documentation. The repository has a single context.
@@ -17,7 +9,7 @@ How the engineering skills find and use this repository's domain documentation. 
 
 ## Writing decision records
 
-Skills that record an ADR write a decision record instead, in `docs/decisions/`, following the rules and template in [docs/decisions/README.md](../decisions/README.md). Use the next free four-digit number and a file name stating the decision. New records start with status `proposed`.
+Skills that record an ADR write a decision record instead, in `docs/decisions/`, following the rules and template in [docs/decisions/README.md](../decisions/README.md). Use the next free four-digit number and a file name stating the decision. New records start with status `proposed`. Never mark a record superseded or deprecated and never add a superseding record; when a decision changes, edit its record in place.
 
 ## Using the glossary
 

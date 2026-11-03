@@ -1,12 +1,6 @@
----
-status: accepted
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Accepted by Serge in conversation.
----
-
 # Commit agent skills to the repository
+
+Status: accepted.
 
 ## Context and problem
 

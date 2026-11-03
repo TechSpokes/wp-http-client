@@ -1,12 +1,6 @@
----
-status: proposed
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Migrated from D5 in docs/decisions.md.
----
-
 # Key batch results by submission order
+
+Status: proposed.
 
 ## Context and problem
 

@@ -1,11 +1,3 @@
----
-status: review
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: What WordPress, Requests and other packages offer today, and lessons from earlier TechSpokes clients.
----
-
 # Existing solutions
 
 What already exists for outbound HTTP in WordPress, and why none of it covers the problem. Lessons from earlier TechSpokes attempts are recorded without their code, which is private.

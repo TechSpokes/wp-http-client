@@ -1,12 +1,6 @@
----
-status: proposed
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Migrated from O1 in docs/decisions.md.
----
-
 # Offer no fire-and-forget requests in 1.0
+
+Status: proposed.
 
 ## Context and problem
 

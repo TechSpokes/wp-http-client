@@ -1,11 +1,3 @@
----
-status: review
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Triage label vocabulary for the triage skills.
----
-
 # Triage labels
 
 The triage skills speak of five roles. This repository uses the default label for each role unchanged.

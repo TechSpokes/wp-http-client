@@ -1,11 +1,3 @@
----
-status: review
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Developer problems with outbound HTTP in WordPress, migrated from scope-and-user-stories.md section 3.
----
-
 # Developer pain points
 
 What developers struggle with when making HTTP calls from WordPress plugins and themes, the evidence, and what each problem implies for the package. Sources are listed at the end.

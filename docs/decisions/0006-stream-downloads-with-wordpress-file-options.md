@@ -1,12 +1,6 @@
----
-status: proposed
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Migrated from D6 in docs/decisions.md.
----
-
 # Stream downloads with WordPress file options
+
+Status: proposed.
 
 ## Context and problem
 

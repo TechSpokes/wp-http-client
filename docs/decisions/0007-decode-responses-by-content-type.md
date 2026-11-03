@@ -1,12 +1,6 @@
----
-status: proposed
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Migrated from D7 in docs/decisions.md.
----
-
 # Decode responses by content type
+
+Status: proposed.
 
 ## Context and problem
 

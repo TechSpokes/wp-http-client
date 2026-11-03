@@ -1,12 +1,6 @@
----
-status: proposed
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Migrated from D10 in docs/decisions.md.
----
-
 # Use nyholm/psr7, prefixed with Strauss
+
+Status: proposed.
 
 ## Context and problem
 

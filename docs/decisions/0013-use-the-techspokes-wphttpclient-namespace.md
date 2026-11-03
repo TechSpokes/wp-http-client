@@ -1,12 +1,6 @@
----
-status: proposed
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Proposed. Replaces the TechSpokes\WPHttpClient namespace proposed in the handoff.
----
-
 # Use the TechSpokes\WpHttpClient namespace
+
+Status: proposed.
 
 ## Context and problem
 

@@ -1,11 +1,3 @@
----
-status: review
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Vision, audiences, user stories, scope and phasing, migrated from scope-and-user-stories.md and decisions.md section 1.
----
-
 # Vision and scope
 
 ## Vision

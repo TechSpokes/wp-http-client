@@ -1,11 +1,3 @@
----
-status: review
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Request pipeline of WP_Http::request() and its hooks bridge, read from WordPress trunk.
----
-
 # WordPress HTTP request pipeline
 
 What `WP_Http::request()` does to one request, in order. The package's batch transport must reproduce this for every member, so each step names the hook or option involved.

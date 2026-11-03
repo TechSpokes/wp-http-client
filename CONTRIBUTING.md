@@ -18,7 +18,7 @@ Use the issue forms for bugs, feature requests and questions. Report vulnerabili
 
 ## Proposing a decision
 
-Record any choice that is hard to reverse or would surprise a reader as a new file in [docs/decisions/](docs/decisions/README.md), with status `proposed`. The maintainer accepts or rejects it.
+Record any choice that is hard to reverse or would surprise a reader as a new file in [docs/decisions/](docs/decisions/README.md), with status `proposed`. The maintainer accepts it or turns it down; a changed decision is edited in place rather than superseded by a new record.
 
 ## Branches and commits
 
@@ -36,7 +36,7 @@ Add a line under `## [Unreleased]` in `CHANGELOG.md` for every user-visible chan
 
 ## Documentation
 
-Write documentation in Markdown following [docs/markdown-style.md](docs/markdown-style.md). Put each file where [docs/repository-structure.md](docs/repository-structure.md) says it belongs.
+Write documentation in Markdown following [docs/markdown-style.md](docs/markdown-style.md). Put each file where [docs/repository-structure.md](docs/repository-structure.md) says it belongs, and follow [docs/AGENTS.md](docs/AGENTS.md). Keep only current information: update or delete outdated text in place and leave the past to Git history.
 
 ## Development setup
 

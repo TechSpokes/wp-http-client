@@ -1,12 +1,6 @@
----
-status: proposed
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Proposed. Replaces the PHP 8.1 floor proposed in D11 of docs/decisions.md.
----
-
 # Require PHP 8.2 or later
+
+Status: proposed.
 
 ## Context and problem
 

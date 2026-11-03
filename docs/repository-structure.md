@@ -1,11 +1,3 @@
----
-status: current
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Repository layout, naming conventions and the migration of the first documents, approved by Serge.
----
-
 # Repository structure and naming conventions
 
 Where every kind of file lives, how it is named, and what ships in the Composer package. When a new kind of file appears, add it here first.
@@ -36,7 +28,7 @@ wp-http-client/
 |   |-- PULL_REQUEST_TEMPLATE.md
 |   `-- dependabot.yml
 |-- bin/                         Maintenance scripts (Bash)
-|-- docs/                        Project documentation
+|-- docs/                        Project documentation, with its own AGENTS.md
 |-- src/                         (later) Package code
 |-- tests/                       (later) Test code
 |-- .editorconfig
@@ -44,7 +36,7 @@ wp-http-client/
 |-- .gitignore
 |-- AGENTS.md                    Operating rules for AI assistants and people
 |-- CHANGELOG.md                 Release notes
-|-- CLAUDE.md                    One line: @AGENTS.md
+|-- CLAUDE.md                    One line: @AGENTS.md (beside every AGENTS.md)
 |-- CODE_OF_CONDUCT.md           Contributor Covenant 2.1
 |-- CONTRIBUTING.md              How work is proposed, reviewed and merged
 |-- LICENSE                      GPL-3.0
@@ -86,7 +78,7 @@ docs/
 
 `glossary.md` defines the words the project uses. Code, issues and documents use these terms and no synonyms.
 
-`decisions/` records why: one choice per file, with the rejected options. A changed mind is a new record that supersedes the old one, never an edit.
+`decisions/` records why: one choice per file, with the rejected options. When a decision changes, its record is edited in place under the same number.
 
 `design/` describes how the package works now, kept current in place and linking to the decisions behind it. Each component has one file named after it; `transport.md` describes `src/Transport/`.
 
@@ -115,15 +107,15 @@ Read `AGENTS.md`, `docs/README.md`, `vision-and-scope.md` and `glossary.md`, the
 | PHP source | PSR-4, one class per file named after it | `src/Transport/WordPressTransport.php` |
 | PHP tests | mirror the source path, `Test` suffix | `tests/Unit/Transport/WordPressTransportTest.php` |
 
-Names use ASCII letters, digits and hyphens. Do not put dates, versions or status words in names; they go in frontmatter.
+Names use ASCII letters, digits and hyphens. Do not put dates, versions or status words in names.
 
 ### Decision records
 
 The rules for numbering, naming, statuses and sections are in [decisions/README.md](decisions/README.md).
 
-### Document status
+### Current information only
 
-Documents other than decision records use `draft`, `review` (waiting for Serge) or `current` (approved and true). They are updated in place; Git keeps history.
+Every file on the current commit is in force and describes the project as it is now. Superseded content is updated, replaced or deleted in place, never kept beside the current version; Git history holds the past. Work that is not approved yet lives on a branch or in a pull request, not on `main`. Decision records carry the only status line, as described in [decisions/README.md](decisions/README.md). Documents have no YAML frontmatter.
 
 ### Branches and commits
 
@@ -141,27 +133,21 @@ Branches are named `<type>/<short-description>` with the Conventional Commits ty
 
 ## Agent configuration
 
-`AGENTS.md` stays short and links to `docs/` for detail. Its "Agent skills" section points Matt Pocock's skills to `docs/agents/` and overrides two of their defaults: decisions live in `docs/decisions/`, not `docs/adr/`, and the glossary is `docs/glossary.md`, not a root `GLOSSARY.md`.
+`AGENTS.md` stays short and links to `docs/` for detail.
+
+### Scoped instructions
+
+A folder whose work needs rules of its own gets an `AGENTS.md` with only those rules, and a `CLAUDE.md` beside it containing the single line `@AGENTS.md`. Codex reads `AGENTS.md` files from the root down to its working folder, and Claude Code reads `CLAUDE.md` files in the folders it works in, so both tools see the same rules.
+
+Scoped files exist today in `docs/`. They are planned for `src/` (code rules: transport boundary, public API and `@internal`) and `tests/` (synthetic fixtures, unit versus integration, parity suite) when those folders are created. `.gitattributes` keeps every `AGENTS.md` and `CLAUDE.md` out of the package.
+
+### Skills
+
+The "Agent skills" section of the root `AGENTS.md` points Matt Pocock's skills to `docs/agents/` and overrides two of their defaults: decisions live in `docs/decisions/`, not `docs/adr/`, and the glossary is `docs/glossary.md`, not a root `GLOSSARY.md`.
 
 His setup skill is not installed, because it writes into `CLAUDE.md`. `bin/install-agent-skills.sh` holds the skill list and the pinned upstream commits and copies the skills into `.agents/skills/` and `.claude/skills/`.
 
 The repository checks workflow fails when the two skill folders differ or when a package archive contains anything outside the allow-list.
-
-## Migration of the first documents
-
-| Earlier document | Now |
-| --- | --- |
-| `scope-and-user-stories.md`, vision, stories, scope | `vision-and-scope.md` |
-| `scope-and-user-stories.md`, developer problems | `research/developer-pain-points.md` |
-| `scope-and-user-stories.md`, what WordPress offers | `research/existing-solutions.md` |
-| `scope-and-user-stories.md`, open questions | answered by decision records |
-| `decisions.md`, what it should feel like | `vision-and-scope.md` |
-| `decisions.md`, D1 to D10 | `decisions/0001` to `0010` |
-| `decisions.md`, D11 | `decisions/0011` and `0012` |
-| `decisions.md`, O1 | `decisions/0015` |
-| Handoff, earlier TechSpokes clients | `research/existing-solutions.md`, lessons only |
-| Handoff, verified WordPress facts | `research/wordpress-http-request-pipeline.md` |
-| Batch-mode findings | `research/requests-batch-mode-gaps.md` |
 
 ## GitHub settings
 

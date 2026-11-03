@@ -1,11 +1,3 @@
----
-status: review
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Map of the project documentation.
----
-
 # Documentation
 
 This folder holds everything the project knows about itself. Read the documents in the order below; each one links to the next level of detail.
@@ -22,6 +14,7 @@ This folder holds everything the project knows about itself. Read the documents 
 - [research/](#research): verified facts the decisions and design rely on.
 - [repository-structure.md](repository-structure.md): where every kind of file lives and how it is named.
 - [markdown-style.md](markdown-style.md): how to write Markdown in this repository.
+- [AGENTS.md](AGENTS.md): rules for keeping the documentation current.
 - [agents/](#agent-configuration): configuration read by the agent skills.
 
 ## Research

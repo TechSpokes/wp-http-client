@@ -1,11 +1,3 @@
----
-status: review
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: GitHub Issues configuration for the issue tracker skills.
----
-
 # Issue tracker: GitHub
 
 Issues and specs for this repository live in GitHub Issues for `TechSpokes/wp-http-client`. Use the `gh` CLI for every operation; it infers the repository from `git remote -v` inside a clone.

@@ -1,11 +1,3 @@
----
-status: current
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Markdown rules for all documents in the repository, adopted from the TechSpokes house style.
----
-
 # Markdown style
 
 Humans, AI assistants, parsers and editors all read the Markdown in this repository. Each parses structure differently, so meaning must live in words and in structural syntax, never in visual decoration.
@@ -40,7 +32,6 @@ If removing bold, a dash, nesting or indentation would change what the text says
 
 ## Separators, code and tables
 
-- Allow YAML frontmatter only at the very start of a file.
 - Never use horizontal rules in the body; use headings.
 - Give every fenced code block a language identifier and keep examples minimal.
 - Give every table a header row and keep cells to short phrases; no lists, headings or code blocks in cells.
@@ -53,4 +44,4 @@ Use `must` and `must not` for requirements, `should` for strong recommendations,
 
 ## Frontmatter
 
-Documents in `docs/` and `AGENTS.md` start with YAML frontmatter holding `status`, `updated` and `history`. Decision records use the statuses in [decisions/README.md](decisions/README.md); other documents use `draft`, `review` or `current`. Root community files and `CLAUDE.md` have no frontmatter; `SKILL.md` files keep the frontmatter their format requires.
+Do not use YAML frontmatter. A document on the current commit is in force, and Git history records when and why it changed. The only exceptions are files whose format requires frontmatter, such as `SKILL.md`; there it goes at the very start of the file.

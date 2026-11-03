@@ -12,6 +12,10 @@
 /README.md -export-ignore
 /CHANGELOG.md -export-ignore
 
+# Agent instructions never ship, wherever they live.
+AGENTS.md export-ignore
+CLAUDE.md export-ignore
+
 # Third-party agent skills: keep them out of GitHub language statistics.
 /.agents/** linguist-vendored
 /.claude/** linguist-vendored

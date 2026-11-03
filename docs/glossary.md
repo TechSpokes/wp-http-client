@@ -1,18 +1,10 @@
----
-status: review
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: First set of project terms.
----
-
 # Glossary
 
 Use these terms in code, issues and documents, and avoid the listed synonyms. Add a term here when a discussion settles its meaning.
 
 ## Batch
 
-A set of requests submitted together and sent in parallel, each under a key chosen by the caller. A single request is treated as a batch of one. Avoid: multi-request, async request.
+A set of requests submitted together and sent in parallel, each under a key chosen by the caller. Middleware treats a single request as a batch of one, while the transport still sends it through `wp_remote_request()` (decision 0001). Avoid: multi-request, async request.
 
 ## Member
 

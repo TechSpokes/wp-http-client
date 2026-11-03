@@ -1,16 +1,10 @@
----
-status: accepted
-updated: 2026-11-03
-history:
-  - date: 2026-11-03
-    summary: Accepted by Serge in conversation. Supersedes the WordPress 6.2 floor proposed in D11 of docs/decisions.md.
----
-
 # Support WordPress 7.0 and later
+
+Status: accepted.
 
 ## Context and problem
 
-The package needs a WordPress floor for its compatibility promise and its CI matrix. The latest release on 2026-11-03 is 7.1.4. D11 had proposed 6.2, the first release with the `WpOrg\Requests` namespace.
+The package needs a WordPress floor for its compatibility promise and its CI matrix. The latest release on 2026-11-03 is 7.1.4.
 
 ## Options considered
 
