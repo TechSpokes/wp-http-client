@@ -1,0 +1,17 @@
+# Line endings: store and check out text files with LF on every platform.
+* text=auto eol=lf
+
+# Composer installs this package from archives built with `git archive`
+# (GitHub and Packagist zipballs). Only runtime files belong in them.
+# Everything at the top level is excluded first, then the runtime files
+# are allowed back in. New development files stay out by default.
+/* export-ignore
+/src -export-ignore
+/composer.json -export-ignore
+/LICENSE -export-ignore
+/README.md -export-ignore
+/CHANGELOG.md -export-ignore
+
+# Third-party agent skills: keep them out of GitHub language statistics.
+/.agents/** linguist-vendored
+/.claude/** linguist-vendored
