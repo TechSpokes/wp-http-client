@@ -26,11 +26,13 @@ No dependency, but permanent maintenance of code that is not the package's purpo
 
 Use `nyholm/psr7`. Otherwise depend only on the interface packages `psr/http-message`, `psr/http-factory`, `psr/http-client` and `psr/log`. This gives the smallest prefixed footprint with no code to maintain.
 
-Consumers prefix the package and its dependencies with Strauss when they bundle it. A consumer that already provides PSR-7 may inject its own factories.
+Consumers must prefix the package and its dependencies with Strauss when they distribute it to sites they do not control. A consumer that already provides PSR-7 may inject its own factories from the same prefixed build.
 
 ## Consequences
 
 The package documents the Strauss configuration and build step for consumers. Every new runtime dependency must stay prefixable.
+
+Strauss prefixes `psr/*` packages by default, so the PSR interfaces change name with everything else. A logger, factory or SDK passed to a client must come from the same prefixed build.
 
 ## Confirmation
 

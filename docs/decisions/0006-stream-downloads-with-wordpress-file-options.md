@@ -26,7 +26,7 @@ The package exposes behaviour WordPress already has, per batch member, with a cl
 
 Map downloads onto WordPress's own options. `Endpoint::download($url)->toFile($path)->maxBytes($n)` maps one to one onto `stream`, `filename` and `limit_response_size`, including the temp-dir default when no path is given, and works per member inside a batch.
 
-The response body is a PSR-7 stream over the file. `request.progress` is surfaced as an optional callback.
+The response body is a PSR-7 stream over the file. A download that reaches the byte cap is reported as truncated, never as complete. No progress callback ships in 1.0; one can be added in 1.x if a real consumer needs it.
 
 The package builds multipart upload bodies from paths or streams into a correct string with boundary and `Content-Type`. Streamed request bodies are out of scope because the platform cannot send them.
 

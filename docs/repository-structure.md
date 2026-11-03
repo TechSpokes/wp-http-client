@@ -66,9 +66,12 @@ docs/
 |-- decisions/
 |   |-- README.md                   Rules, template and index of records
 |   `-- 0001-....md                 One file per decision
-|-- design/                         (later) How the package works
-|   |-- README.md                   Architecture overview
-|   `-- one file per component: transport.md, client-api.md, middleware.md
+|-- design/                         How the package works
+|   |-- README.md                   Actors, promises, components and open questions
+|   |-- interactions.md             Scenarios and the needs that become tests
+|   |-- architecture.md             Elements, their responsibilities and contracts
+|   |-- plan.md                     Gates from the design to 1.0
+|   `-- (later) one file per component: client-api.md, transport.md, middleware.md
 |-- research/                       Verified facts with sources
 |-- guides/                         (later) For plugin and theme authors
 `-- agents/                         Configuration read by the agent skills
@@ -82,7 +85,7 @@ docs/
 
 `decisions/` records why: one choice per file, with the rejected options. When a decision changes, its record is edited in place under the same number.
 
-`design/` describes how the package works now, kept current in place and linking to the decisions behind it. Each component has one file named after it; `transport.md` describes `src/Transport/`.
+`design/` describes how the package works now, kept current in place and linking to the decisions behind it. `README.md` is the overview, `interactions.md` holds the scenarios, `architecture.md` defines the elements and their contracts, `plan.md` holds the gates to 1.0, and each element has one file named after it; `transport.md` describes `src/Transport/`.
 
 `research/` holds verified facts with their sources and the WordPress and Requests versions checked. Design and decisions cite them instead of repeating them.
 
@@ -129,8 +132,8 @@ Branches are named `<type>/<short-description>` with the Conventional Commits ty
 - The design sets the folders inside `src/`.
 - `tests/Unit/` runs under plain PHPUnit, without WordPress.
 - `tests/Integration/` runs inside WordPress; the batch parity suite is `tests/Integration/Parity/`.
-- `tests/Fixtures/` holds synthetic data only.
-- `docs/design/testing.md` chooses the integration test harness.
+- `tests/Fixtures/` holds synthetic data only; the fixture server and bootstrap live in `tests/Support/`.
+- Decision 0021 chooses the integration test harness, and `docs/design/testing.md` describes it.
 - `composer.lock` is not committed, so the library is tested against the newest dependencies it allows.
 
 ## Agent configuration

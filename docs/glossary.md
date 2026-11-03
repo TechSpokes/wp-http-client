@@ -12,11 +12,27 @@ One request inside a batch, identified by its key. Each member has its own argum
 
 ## Result
 
-The outcome for one member: a response, or the exception that explains why there is none. A result set holds the results of a batch under the submitted keys.
+The outcome for one member as calling code sees it: a value or an exception, and either may carry the response. A result set holds the results of a batch under the submitted keys.
+
+## Delivery
+
+What the transport reports for one member: a PSR-7 response, or a failure value with a kind, a message and the site's error code. The client turns deliveries into results.
 
 ## Endpoint
 
 A value object describing one API call: method, path template, query, body, expected class and per-call options.
+
+## Client
+
+An instance of the package's `final` `ApiClient` class. A plugin or theme usually holds one inside its own class.
+
+## Actor
+
+Anyone or anything that depends on the package or is affected by it. The actors are listed in the design overview.
+
+## Need
+
+One plain sentence stating what an actor can rely on. Each need sits under a scenario in `docs/design/interactions.md` and becomes a test.
 
 ## Site setting
 

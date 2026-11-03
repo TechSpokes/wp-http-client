@@ -4,6 +4,15 @@ All notable changes to this project are documented in this file. The format is b
 
 ## [Unreleased]
 
+### Added
+
+- docs(design): add the design overview, interaction scenarios, architecture, the plan to 1.0 and the client decision.
+- docs(decisions): propose batch concurrency, retry time budget, PSR-18 redirects and the test harness.
+
+### Changed
+
+- docs(decisions): keep retry, logging and caching as middleware and move auth to the client and host rules to the transport.
+
 ## [0.0.1] - 2026-11-03
 
 ### Added

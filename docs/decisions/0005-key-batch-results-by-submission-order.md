@@ -12,25 +12,25 @@ Requests returns batch responses keyed by the submitted ids and offers `multiple
 
 Callers see the fastest results first but must match keys themselves.
 
-### Return results keyed and ordered by submission, with a completion callback
+### Return results keyed and ordered by submission
 
-Callers get results under the keys they submitted, and an optional callback reports each result as it finishes.
+Callers get results under the keys they submitted, once the whole batch is done.
 
-### Offer both orderings as modes
+### Offer both orderings as modes, or a completion callback
 
-Two iteration modes add API surface without covering any case the callback does not.
+More API surface for a case no actor has asked for: a batch is bounded by its slowest member, so acting on results as they arrive saves little inside one PHP request.
 
 ## Decision
 
-Return a result set keyed exactly as submitted, keeping string and integer keys, and iterable in submission order. An optional `onComplete(callable $fn)` receives `(key, Result)` as each member finishes. This matches the underlying library and covers progress reporting and streaming consumers without a second ordering mode.
+Return a result set keyed exactly as submitted, keeping string and integer keys, and iterable in submission order. No completion callback ships in 1.0; one can be added in 1.x without breaking anything if a real consumer needs it.
 
 ## Consequences
 
-Partial failure is normal: each key holds either a success or a failure. Progress UIs and streaming consumers hook into `onComplete`.
+Partial failure is normal: each key holds either a success or a failure.
 
 ## Confirmation
 
-Unit tests with the in-memory transport check key preservation, submission order and callback order.
+Unit tests with the in-memory transport check key preservation and submission order.
 
 ## More information
 

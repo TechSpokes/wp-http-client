@@ -43,21 +43,38 @@ if ( null === $data ) { return new WP_Error( /* ... */ ); }
 return new License( $data['license_key'] ?? '', $data['status'] ?? '' );
 ```
 
-With the package, the author declares the client once and each call states its intent:
+With the package, the author writes one class that holds a client, and the rest of the plugin calls named methods:
 
 ```php
-$store = ApiClient::create( 'https://store.example.com/api/v1' )
-    ->withAuth( Auth::bearer( $token ) )
-    ->withRetry( RetryPolicy::default() )
-    ->withLogger( $logger );
+final class StoreClient
+{
+    private ApiClient $http;
 
-$license = $store->get( '/license/{key}', [ 'key' => $key ] )->expects( License::class )->send();
+    public function __construct( string $token, LoggerInterface $logger, ?Transport $transport = null )
+    {
+        $this->http = new ApiClient(
+            baseUri: 'https://store.example.com/api/v1',
+            auth: Auth::bearer( $token ),
+            retry: RetryPolicy::default(),
+            logger: $logger,
+            transport: $transport,
+        );
+    }
+
+    public function license( string $key ): License
+    {
+        return $this->http->get( '/license/{key}', [ 'key' => $key ] )->expects( License::class )->send();
+    }
+}
+
+$store   = new StoreClient( $token, $logger );
+$license = $store->license( $key );
 ```
 
-A page that needs three things waits for the slowest:
+A method that needs three things waits for the slowest:
 
 ```php
-$results = $store->batch( [
+$results = $this->http->batch( [
     'license' => Endpoint::get( '/license/{key}', [ 'key' => $key ] )->expects( License::class ),
     'version' => Endpoint::get( '/version/{slug}', [ 'slug' => $slug ] )->expects( PluginVersion::class ),
     'notices' => Endpoint::get( '/notices' ),
@@ -75,7 +92,7 @@ For the site operator, every request, including every member of a batch, passes 
 
 ### Plugin author
 
-- Define an API client with a base URL, default headers and auth once, so each call is one line.
+- Define a client once with a base URL, default headers and auth, so each call is one line.
 - Have `GET /thing/{id}` return a `Thing` object or throw, so arrays need no null checks.
 - Get 4xx and 5xx responses as exceptions carrying status, headers, decoded body and request.
 - Call `toWpError()` on any exception, so existing `WP_Error` code paths keep working.
@@ -119,15 +136,15 @@ A `Transport` interface takes a keyed set of PSR-7 requests and returns keyed re
 
 ### Client surface
 
-A PSR-18 `ClientInterface` implementation handles single requests. A `batch()` method accepts keyed requests or endpoints and returns a result set with per-key success or failure. An `Endpoint` value object and an `ApiClient` base hold the base URI, default headers, auth, middleware and codecs.
+`ApiClient` is a `final` class that a plugin or theme holds inside its own class, as decision 0017 records. It keeps the base URI, default headers, auth, middleware and codecs, and implements PSR-18 `ClientInterface` for single requests. A `batch()` method accepts keyed requests or endpoints and returns a result set with per-key success or failure. An `Endpoint` value object describes one call.
 
 ### Middleware
 
-Middleware operates on batches, a single request being a batch of one. 1.0 ships retry, logging with redaction, auth injection and a host allow and deny list. Caching is designed as middleware and may ship in 1.1.
+Middleware operates on batches, a single request being a batch of one. 1.0 ships retry and logging with redaction. Auth is applied by the client to the requests it builds, and a host allow and deny list is enforced by the transport on every redirect hop. Caching is designed as middleware and may ship in 1.1.
 
 ### Codecs
 
-Requests are encoded as JSON, form-urlencoded or multipart with files. Responses are decoded from JSON, HAL+JSON, problem+JSON and text. The `Accept` header is derived from the registered decoders.
+Requests are encoded as JSON, form-urlencoded or multipart with files. Responses are decoded from JSON, any `+json` type, problem+JSON and text.
 
 ### Hydration
 
@@ -143,7 +160,7 @@ Downloads stream to a file with a size cap and return a PSR-7 response whose bod
 
 ### Packaging
 
-The only runtime dependencies are PSR interfaces and one small PSR-7 implementation. The package ships a Strauss configuration and build instructions and supports WordPress 7.0+ and PHP 8.2+ (the PHP floor is proposed in decision 0012). It is licensed GPL-3.0-or-later, and its public API is everything under the package namespace not marked `@internal`.
+The only runtime dependencies are PSR interfaces and one small PSR-7 implementation. The package ships a Strauss configuration and build instructions, and plugins and themes distributed to sites their authors do not control must prefix it. It supports WordPress 7.0+ and PHP 8.2+ (the PHP floor is proposed in decision 0012). It is licensed GPL-3.0-or-later, and its public API is everything under the package namespace not marked `@internal`.
 
 ### Observability
 
@@ -183,7 +200,7 @@ Each attempt produces one structured PSR-3 log entry with timing. `Authorization
 
 1. Foundation: PSR-7 and PSR-17 wiring, in-memory transport, codecs, error model, single-request PSR-18 client.
 2. WordPress transport: single-request parity with `wp_remote_request()`, then batch parity.
-3. Middleware: batch-aware retry, logging with redaction, auth, host policy.
+3. Middleware and policy: batch-aware retry, logging with redaction, auth, host rules.
 4. Developer surface: `Endpoint`, `ApiClient`, hydrator, `toWpError()`, and a worked example client.
 5. Streaming: downloads with size caps, multipart uploads.
 6. Release 1.0, then cache and rate-limit middleware in 1.x.
