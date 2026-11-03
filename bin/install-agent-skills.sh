@@ -3,6 +3,8 @@
 # Installs the third-party agent skills, pinned to the upstream commits below.
 # Skills are copied into .agents/skills/ (Codex and most agents) and
 # .claude/skills/ (Claude Code), and recorded in skills-lock.json.
+# Skills written for this repository live only in .agents/skills/; the script
+# keeps them and copies them to .claude/skills/.
 #
 # To update: change a commit or the lists, run this script, review the diff.
 # Requires Node.js 22.20 or newer.
@@ -29,8 +31,26 @@ pocock_skills=(
 
 export DISABLE_TELEMETRY=1 DO_NOT_TRACK=1
 
-# Start clean so the installed set matches the lists above exactly.
-rm -rf .agents/skills .claude/skills skills-lock.json
+# Remove only the third-party skills recorded in the lock file, so the result
+# matches the lists above exactly. Skills written for this repository are kept.
+if [[ -f skills-lock.json ]]; then
+  while IFS= read -r skill; do
+    rm -rf ".agents/skills/$skill" ".claude/skills/$skill"
+  done < <(node -e 'for (const name of Object.keys(require("./skills-lock.json").skills ?? {})) console.log(name)')
+  rm -f skills-lock.json
+fi
 
 npx --yes "$installer" add "$wordpress" --skill "${wordpress_skills[@]}" --agent codex claude-code --copy --yes
 npx --yes "$installer" add "$pocock" --skill "${pocock_skills[@]}" --agent codex claude-code --copy --yes
+
+# Copy skills written for this repository from .agents/skills to .claude/skills.
+for dir in .agents/skills/*/; do
+  skill="$(basename "$dir")"
+  rm -rf ".claude/skills/$skill"
+  cp -R "$dir" ".claude/skills/$skill"
+done
+
+if ! diff -r .agents/skills .claude/skills > /dev/null; then
+  echo 'error: .agents/skills and .claude/skills differ' >&2
+  exit 1
+fi
