@@ -1,6 +1,6 @@
 # Hold a final client in each plugin or theme
 
-Status: proposed.
+Status: accepted.
 
 ## Context and problem
 
