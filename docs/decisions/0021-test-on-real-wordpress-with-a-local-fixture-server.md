@@ -39,11 +39,11 @@ If the SQLite drop-in fails on a version the package must support, the fallback 
 
 ## Consequences
 
-Running the tests needs PHP, Composer and network access to download WordPress once. Database behaviour is not under test, so the SQLite choice costs nothing. The fixture server and bootstrap are the first code written, before any package code, and they are dev dependencies only.
+Running the tests needs PHP, Composer and network access to download WordPress once. Database behaviour is not under test, so the SQLite choice costs nothing. The fixture server and bootstrap live in `tests/Support/` and are the first code written, before any package code; `composer.json` carries them as development dependencies only, and `src/` stays empty until the element design files are approved.
 
 ## Confirmation
 
-The first test in the repository sends `wp_remote_request()` to the fixture through the harness and compares the result with itself; it passes on all four CI cells before any package code is merged.
+The first test in the repository sends `wp_remote_request()` to the fixture through the harness and asserts what the fixture received; it passes on all four CI cells before any package code is merged.
 
 ## More information
 

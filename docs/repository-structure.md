@@ -132,8 +132,8 @@ Branches are named `<type>/<short-description>` with the Conventional Commits ty
 - The design sets the folders inside `src/`.
 - `tests/Unit/` runs under plain PHPUnit, without WordPress.
 - `tests/Integration/` runs inside WordPress; the batch parity suite is `tests/Integration/Parity/`.
-- `tests/Fixtures/` holds synthetic data only.
-- `docs/design/testing.md` chooses the integration test harness.
+- `tests/Fixtures/` holds synthetic data only; the fixture server and bootstrap live in `tests/Support/`.
+- Decision 0021 chooses the integration test harness, and `docs/design/testing.md` describes it.
 - `composer.lock` is not committed, so the library is tested against the newest dependencies it allows.
 
 ## Agent configuration
