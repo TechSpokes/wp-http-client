@@ -1,32 +1,25 @@
 # Issue tracker: GitHub
 
-Issues and specs for this repository live in GitHub Issues for `TechSpokes/wp-http-client`. File issues only there, never in the repositories the skills come from.
+Issues and specs for this repository live in GitHub Issues for `TechSpokes/wp-http-client`. Use the `gh` CLI for every operation; it infers the repository from `git remote -v` inside a clone.
 
-## Use the REST API
-
-Run every operation as a REST call with `gh api`, from inside a clone. Commands such as `gh issue create` and `gh issue list` use GitHub's GraphQL API, which some agent environments block; the REST calls below work everywhere. `gh api` replaces `{owner}/{repo}` with the current repository.
+File issues only in `TechSpokes/wp-http-client`. Never file in the repositories the skills come from.
 
 ## Create, read and list
 
-- Create: `gh api 'repos/{owner}/{repo}/issues' -f title='...' -f body='...' -f 'labels[]=needs-triage'`.
-- Read: `gh api 'repos/{owner}/{repo}/issues/<n>'`, and its comments with `gh api 'repos/{owner}/{repo}/issues/<n>/comments'`.
-- List: `gh api 'repos/{owner}/{repo}/issues?state=open&labels=<label>' --jq '.[] | select(.pull_request | not) | {number, title}'`.
-- Comment: `gh api 'repos/{owner}/{repo}/issues/<n>/comments' -f body='...'`.
-- Add a label: `gh api 'repos/{owner}/{repo}/issues/<n>/labels' -f 'labels[]=<label>'`.
-- Remove a label: `gh api -X DELETE 'repos/{owner}/{repo}/issues/<n>/labels/<label>'`.
-- Close: comment with the reason, then `gh api -X PATCH 'repos/{owner}/{repo}/issues/<n>' -f state=closed`.
-
-The issues endpoint also returns pull requests; the `select(.pull_request | not)` filter drops them. Write multi-line bodies to a file and pass them with `-F body=@<file>`.
+- Create: `gh issue create --title "..." --body "..."`, with a heredoc for multi-line bodies.
+- Read: `gh issue view <number> --json number,title,body,labels,comments`.
+- List: `gh issue list --state open --json number,title,labels` with `--label` filters as needed.
+- Comment: `gh issue comment <number> --body "..."`.
+- Label: `gh issue edit <number> --add-label "..."` or `--remove-label "..."`.
+- Close: comment with the reason first, then `gh issue close <number>`.
 
 ## Parents and blocking
 
-Sub-issues and dependencies take the database id of the other issue, not its number. Get it with `gh api 'repos/{owner}/{repo}/issues/<n>' --jq .id`.
+These commands need `gh` 2.94 or later; with an older `gh`, use the text fallbacks.
 
-- Make a sub-issue: `gh api 'repos/{owner}/{repo}/issues/<parent>/sub_issues' -F sub_issue_id=<child-id>`.
-- Record a blocker: `gh api 'repos/{owner}/{repo}/issues/<n>/dependencies/blocked_by' -F issue_id=<blocker-id>`.
-- Count open blockers: `gh api 'repos/{owner}/{repo}/issues/<n>' --jq .issue_dependencies_summary.blocked_by`; 0 means the issue can start.
+Make an issue a sub-issue with `gh issue create --parent <parent>` or `gh issue edit <parent> --add-sub-issue <child>`. Without sub-issue support, put `Part of #<parent>` at the top of the child body.
 
-When these endpoints are unavailable, put `Part of #<parent>` or `Blocked by: #<n>` at the top of the issue body instead.
+Record blocking with GitHub issue dependencies: `gh issue edit <child> --add-blocked-by <blocker>`. Without dependency support, put `Blocked by: #<n>` at the top of the child body. An issue is ready when every blocker is closed.
 
 ## Pull requests as a triage surface
 
@@ -34,6 +27,6 @@ PRs as a request surface: no. External pull requests are reviewed as pull reques
 
 ## Skill vocabulary
 
-When a skill says "publish to the issue tracker", create a GitHub issue. When it says "fetch the relevant ticket", read the issue and its comments as above.
+When a skill says "publish to the issue tracker", create a GitHub issue. When it says "fetch the relevant ticket", read the issue as above.
 
-For the wayfinder skill, the map is one issue labelled `wayfinder:map`; its tickets are sub-issues labelled `wayfinder:research`, `wayfinder:prototype`, `wayfinder:grilling` or `wayfinder:task`. Claim a ticket with `gh api 'repos/{owner}/{repo}/issues/<n>/assignees' -f "assignees[]=$(gh api user --jq .login)"`, then resolve it with a comment and close it.
+For the wayfinder skill, the map is one issue labelled `wayfinder:map`; its tickets are sub-issues labelled `wayfinder:research`, `wayfinder:prototype`, `wayfinder:grilling` or `wayfinder:task`. Claim a ticket with `gh issue edit <n> --add-assignee @me` and resolve it with a comment, then close it.
