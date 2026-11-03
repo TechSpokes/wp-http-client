@@ -56,6 +56,8 @@ Tool configuration stays at the root, where the tools look for it. Committed con
 
 ```text
 docs/
+|-- AGENTS.md                       Rules for keeping the documentation current
+|-- CLAUDE.md                       One line: @AGENTS.md
 |-- README.md                       Map of the documentation and reading order
 |-- vision-and-scope.md             Problem, audiences, user stories, scope, phasing
 |-- glossary.md                     Project vocabulary

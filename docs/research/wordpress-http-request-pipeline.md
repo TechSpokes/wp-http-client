@@ -4,7 +4,7 @@ What `WP_Http::request()` does to one request, in order. The package's batch tra
 
 ## Sources checked
 
-Read on 2026-11-03 from WordPress trunk: `wp-includes/class-wp-http.php` and `wp-includes/class-wp-http-requests-hooks.php`. Not yet re-checked against the 7.0 tag, the oldest supported release.
+Checked on 2026-11-03 against WordPress 7.0, the oldest supported release, and trunk: `wp-includes/class-wp-http.php` and `wp-includes/class-wp-http-requests-hooks.php`. `WP_Http::request()` is identical in both, and the hooks bridge differs only in comments.
 
 ## 1. Defaults
 
