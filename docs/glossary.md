@@ -18,6 +18,18 @@ The outcome for one member: a response, or the exception that explains why there
 
 A value object describing one API call: method, path template, query, body, expected class and per-call options.
 
+## Client
+
+An instance of the package's `final` `ApiClient` class. A plugin or theme usually holds one inside its own class.
+
+## Actor
+
+Anyone or anything that depends on the package or is affected by it. The actors are listed in the design overview.
+
+## Need
+
+One plain sentence stating what an actor can rely on. Each need sits under a scenario in `docs/design/interactions.md` and becomes a test.
+
 ## Site setting
 
 Any decision the WordPress installation already makes about HTTP: a default, a filter, a constant or a bundled library choice. The package inherits site settings and does not re-decide them.

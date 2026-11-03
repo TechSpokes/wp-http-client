@@ -4,6 +4,10 @@ All notable changes to this project are documented in this file. The format is b
 
 ## [Unreleased]
 
+### Added
+
+- docs(design): add the design overview, interaction scenarios and the client decision.
+
 ## [0.0.1] - 2026-11-03
 
 ### Added

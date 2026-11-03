@@ -89,3 +89,4 @@ Each record states its own status. List the proposals with `grep -l 'Status: pro
 - [0014 Follow PER Coding Style](0014-follow-per-coding-style.md)
 - [0015 Offer no fire-and-forget requests in 1.0](0015-offer-no-fire-and-forget-requests-in-1-0.md)
 - [0016 Commit agent skills to the repository](0016-commit-agent-skills-to-the-repository.md)
+- [0017 Hold a final client in each plugin or theme](0017-hold-a-final-client-in-each-plugin-or-theme.md)

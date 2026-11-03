@@ -66,9 +66,10 @@ docs/
 |-- decisions/
 |   |-- README.md                   Rules, template and index of records
 |   `-- 0001-....md                 One file per decision
-|-- design/                         (later) How the package works
-|   |-- README.md                   Architecture overview
-|   `-- one file per component: transport.md, client-api.md, middleware.md
+|-- design/                         How the package works
+|   |-- README.md                   Actors, promises, components and open questions
+|   |-- interactions.md             Scenarios and the needs that become tests
+|   `-- (later) one file per component: client-api.md, transport.md, middleware.md
 |-- research/                       Verified facts with sources
 |-- guides/                         (later) For plugin and theme authors
 `-- agents/                         Configuration read by the agent skills
@@ -82,7 +83,7 @@ docs/
 
 `decisions/` records why: one choice per file, with the rejected options. When a decision changes, its record is edited in place under the same number.
 
-`design/` describes how the package works now, kept current in place and linking to the decisions behind it. Each component has one file named after it; `transport.md` describes `src/Transport/`.
+`design/` describes how the package works now, kept current in place and linking to the decisions behind it. `README.md` is the overview, `interactions.md` holds the scenarios, and each component has one file named after it; `transport.md` describes `src/Transport/`.
 
 `research/` holds verified facts with their sources and the WordPress and Requests versions checked. Design and decisions cite them instead of repeating them.
 

@@ -15,7 +15,7 @@ The problem, scope and design decisions are documented in [docs/README.md](docs/
 
 ## Installation
 
-The package will be published on Packagist as `techspokes/wp-http-client`. Plugins and themes that bundle it should prefix it with Strauss so that two plugins shipping different versions cannot collide; a guide comes with the first runtime release.
+The package will be published on Packagist as `techspokes/wp-http-client`. Plugins and themes distributed to sites their authors do not control must prefix it with Strauss so that two plugins shipping different versions cannot collide; a guide comes with the first runtime release.
 
 ## Design principles
 
