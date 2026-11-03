@@ -1,0 +1,29 @@
+name: Repository checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  repository:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Agent skill copies are identical
+        run: diff -r .agents/skills .claude/skills
+
+      - name: Package archive contains only runtime files
+        run: |
+          unexpected="$(git archive HEAD | tar -t | grep -vE '^(src/.*|composer\.json|LICENSE|README\.md|CHANGELOG\.md)$' || true)"
+          if [ -n "$unexpected" ]; then
+            echo "Files outside the .gitattributes allow-list would ship in the package:"
+            echo "$unexpected"
+            exit 1
+          fi

@@ -1,0 +1,27 @@
+name: Feature request
+description: Suggest a feature or an improvement.
+labels: [enhancement, needs-triage]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem would this solve, and for whom?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: The behavior or API you have in mind.
+    validations:
+      required: true
+  - type: textarea
+    id: wordpress-equivalent
+    attributes:
+      label: Existing WordPress setting
+      description: Does WordPress already have a filter, constant or setting for this? The package reuses those instead of adding options.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

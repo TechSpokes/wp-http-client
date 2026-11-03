@@ -1,0 +1,55 @@
+name: Bug report
+description: Report a reproducible problem with the package.
+labels: [bug, needs-triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Remove tokens, cookies, keys and personal data from everything you paste.
+  - type: input
+    id: package-version
+    attributes:
+      label: Package version
+      placeholder: e.g. 1.0.0 or a commit hash
+    validations:
+      required: true
+  - type: input
+    id: wordpress-version
+    attributes:
+      label: WordPress version
+      placeholder: e.g. 7.1.4
+    validations:
+      required: true
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP version
+      placeholder: e.g. 8.3.14
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: The shortest code that shows the problem.
+      render: php
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+      description: What you expected to happen and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: debug-output
+    attributes:
+      label: Debug output
+      description: Errors, stack traces, or `http_api_debug` output with secrets removed.
+      render: text
+  - type: textarea
+    id: environment
+    attributes:
+      label: Site environment
+      description: Relevant plugins, proxy or `WP_HTTP_BLOCK_EXTERNAL` settings, hosting details.

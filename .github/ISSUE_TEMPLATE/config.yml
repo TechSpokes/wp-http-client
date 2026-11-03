@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/TechSpokes/wp-http-client/security/advisories/new
+    about: Report vulnerabilities privately, never in a public issue.
+  - name: Documentation
+    url: https://github.com/TechSpokes/wp-http-client/blob/main/docs/README.md
+    about: Scope, decisions and design of the package.
+  - name: Commercial support
+    url: https://www.techspokes.com/contact/
+    about: Professional support and consulting from TechSpokes.

@@ -1,0 +1,7 @@
+version: 2
+updates:
+  # Add a composer entry once composer.json exists.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly

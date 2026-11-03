@@ -1,0 +1,16 @@
+name: Question
+description: Ask how to use the package.
+labels: [question]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What you are trying to do and where you are stuck.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Package, WordPress and PHP versions, and a minimal code sample if relevant.
