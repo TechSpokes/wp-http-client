@@ -6,7 +6,8 @@ All notable changes to this project are documented in this file. The format is b
 
 ### Added
 
-- docs(design): add the design overview, interaction scenarios, architecture and the client decision.
+- docs(design): add the design overview, interaction scenarios, architecture, the plan to 1.0 and the client decision.
+- docs(decisions): propose batch concurrency, retry time budget, PSR-18 redirects and the test harness.
 
 ### Changed
 

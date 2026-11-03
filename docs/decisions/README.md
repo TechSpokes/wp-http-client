@@ -90,3 +90,7 @@ Each record states its own status. List the proposals with `grep -l 'Status: pro
 - [0015 Offer no fire-and-forget requests in 1.0](0015-offer-no-fire-and-forget-requests-in-1-0.md)
 - [0016 Commit agent skills to the repository](0016-commit-agent-skills-to-the-repository.md)
 - [0017 Hold a final client in each plugin or theme](0017-hold-a-final-client-in-each-plugin-or-theme.md)
+- [0018 Send batch members at once with an optional cap](0018-send-batch-members-at-once-with-an-optional-cap.md)
+- [0019 Cap the time retries may add to a call](0019-cap-the-time-retries-may-add-to-a-call.md)
+- [0020 Follow site redirect settings on the PSR-18 path](0020-follow-site-redirect-settings-on-the-psr-18-path.md)
+- [0021 Test on real WordPress with a local fixture server](0021-test-on-real-wordpress-with-a-local-fixture-server.md)

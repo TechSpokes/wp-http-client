@@ -144,7 +144,7 @@ Middleware operates on batches, a single request being a batch of one. 1.0 ships
 
 ### Codecs
 
-Requests are encoded as JSON, form-urlencoded or multipart with files. Responses are decoded from JSON, HAL+JSON, problem+JSON and text. The `Accept` header is derived from the registered decoders.
+Requests are encoded as JSON, form-urlencoded or multipart with files. Responses are decoded from JSON, any `+json` type, problem+JSON and text.
 
 ### Hydration
 

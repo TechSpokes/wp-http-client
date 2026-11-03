@@ -7,7 +7,7 @@ This folder holds everything the project knows about itself. Read the documents 
 1. [vision-and-scope.md](vision-and-scope.md): what the package is for, who it serves, what is in and out of scope.
 2. [glossary.md](glossary.md): the terms used in code, issues and documents.
 3. [decisions/README.md](decisions/README.md): every design decision, why it was made and its status.
-4. [design/README.md](design/README.md): who the package serves and how it is built, followed by [design/interactions.md](design/interactions.md), [design/architecture.md](design/architecture.md) and one file per element. The design is reviewed before any code.
+4. [design/README.md](design/README.md): who the package serves and how it is built, followed by [design/interactions.md](design/interactions.md), [design/architecture.md](design/architecture.md), [design/plan.md](design/plan.md) and one file per element. The design is reviewed before any code.
 
 ## Reference
 

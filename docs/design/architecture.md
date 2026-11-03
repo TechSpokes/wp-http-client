@@ -211,20 +211,18 @@ Every need has one owner, in scenario order.
 
 Packaging is not a runtime element. It is `composer.json`, the Strauss guide and the prefixed CI build, and it owns the one need about two copies on one site.
 
-### Features no need asks for
+### Features left out of 1.0
 
-Each should gain a need or leave 1.0:
+No need asks for these, so they wait for a real consumer: a completion callback for batches (decision 0005), a download progress callback (decision 0006), a separate HAL+JSON decoder, since any `+json` type decodes as JSON, and deriving the `Accept` header from registered decoders. The vision's codec list is read accordingly.
 
-- The `onComplete` callback in decision 0005.
-- The download progress callback in decision 0006.
-- A separate HAL+JSON decoder, because any `+json` type decodes as JSON.
-- Deriving the `Accept` header from registered decoders.
+## Settled by decision records
 
-## Decisions to settle
+- Decision 0018: members are sent at once, with an optional cap per client or batch.
+- Decision 0019: retries are capped in attempts and total waiting time.
+- Decision 0020: the PSR-18 path follows the site's redirect setting.
+- Decision 0021: tests run on real WordPress against a local fixture server.
 
-- Whether a batch limits how many members run at once, and the default limit.
-- The total time limit for retries, and where it is set.
-- Whether redirects on the PSR-18 path follow the site's setting; this proposal says yes, because the package defers to WordPress.
+The order of work from here is in [plan.md](plan.md).
 
 ## Prior art
 
