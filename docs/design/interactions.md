@@ -2,7 +2,7 @@
 
 How the actors in the [design overview](README.md) meet the package, one short scenario at a time. Each scenario ends with the needs it covers: plain sentences stating what an actor can rely on. Every need becomes a test, and a test that traces back to no need is not written.
 
-Component files link to these scenarios instead of repeating them.
+[architecture.md](architecture.md) gives every need one owner. Component files link to these scenarios instead of repeating them.
 
 ## A developer adds a client
 
@@ -32,8 +32,10 @@ Actors: calling code, WordPress, remote service.
 Needs:
 
 - A successful call returns the class the endpoint expects.
+- A body is encoded by its `Content-Type`, and a response is decoded by its own.
 - A client with no middleware sends exactly one request per call.
 - A call with no overrides uses the site's timeout, user agent, redirect and SSL settings.
+- An endpoint can set its own timeout without touching site filters.
 
 ## A batch
 
@@ -57,14 +59,16 @@ Needs:
 
 Actors: site owner, calling code.
 
-1. The site owner blocks external requests or a specific host.
+1. The site owner blocks external requests or a specific host, or the plugin's own host rules exclude it.
 2. A plugin sends a call or a batch that includes that host.
-3. WordPress refuses the call, and nothing leaves the site.
-4. Calling code gets a failure that says the site blocked it.
+3. The call is refused, and nothing leaves the site.
+4. Calling code gets a failure that says who blocked it.
 
 Needs:
 
 - A request the site blocks never leaves the site, whether sent alone or in a batch.
+- A client's host rules stop a call before it is sent.
+- A client can be stricter than the site and never looser.
 - A blocked request is reported differently from a network failure.
 - A retry policy never repeats a blocked request.
 
@@ -96,7 +100,9 @@ Needs:
 - Without a retry policy, nothing is retried.
 - A retry re-sends only the failed members of a batch.
 - Methods that are not safe to repeat are not retried by default.
+- `Retry-After` is honoured within the policy's limit.
 - Retries never hold a request past the policy's time limit.
+- A retry policy can be overridden for one call.
 - Each attempt appears as its own request in the site's debugging tools.
 
 ## A response is not what was expected
@@ -110,6 +116,7 @@ Actors: calling code, plugin or theme developer.
 Needs:
 
 - A 4xx or 5xx response raises an exception carrying status, headers, decoded body and request.
+- A problem+JSON response raises a typed exception with its fields.
 - A body that cannot be decoded raises an exception carrying the raw body and never yields `null`.
 - A mapping failure names the path that failed.
 - Every package exception converts to a `WP_Error`.
@@ -141,6 +148,7 @@ Needs:
 - Without a logger, the package records nothing.
 - Each attempt produces one log entry.
 - Secrets never appear in log entries, exceptions or `WP_Error` data unless a client explicitly opts out.
+- Redacted headers and body patterns can be configured per client.
 
 ## A large download
 
@@ -205,3 +213,15 @@ Needs:
 
 - A plugin's class can use the in-memory transport without changes to its code.
 - The in-memory transport behaves like the WordPress transport in everything a client can see.
+
+## A new WordPress release
+
+Actors: maintainers, WordPress.
+
+1. A WordPress or Requests release changes something the transport relies on.
+2. The parity tests run against the new release before the package is released.
+3. The difference fails a test, and the maintainers fix the transport or document the change.
+
+Needs:
+
+- A WordPress change that alters behaviour fails a test before release.

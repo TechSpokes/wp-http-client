@@ -1,6 +1,6 @@
 # Design overview
 
-Who the package serves, what it promises them and how it is built. [interactions.md](interactions.md) shows how the actors and components meet, and each component gets its own file as it is designed.
+Who the package serves, what it promises them and how it is built. [interactions.md](interactions.md) shows how the actors and elements meet, [architecture.md](architecture.md) defines each element's responsibility and contracts, and each element gets its own file as it is designed.
 
 ## Actors
 
@@ -67,37 +67,36 @@ Retries help the developer, but they cost visitors time and add load on the remo
 
 Logs help debugging, but they can expose secrets. Redaction must cover everything the package records or carries, including exceptions.
 
-## Layers and components
+## Elements
 
-A call travels down through three layers, and the answer comes back up the same way.
+A call travels down through four elements, and the answer comes back up the same way. [architecture.md](architecture.md) defines each one.
 
 ```text
 Plugin or theme code, or an SDK
         |
-     Client        builds the request, turns the answer into a result
+     ApiClient     intent in, answer out; builds requests, applies auth
+        |          uses Body handling
+     Middleware    retry and logging, only when attached
         |
-     Middleware    only what the client attached
-        |
-     Transport     hands requests to WordPress, returns responses or failures
+     Transport     delivers a batch through WordPress, or in memory
         |
      WordPress  -> remote service
 ```
 
-The client layer is made of three components, which gives the package five in all.
-
-| Component | Job | Folder | Design file |
+| Element | Job | Folder | Design file |
 | --- | --- | --- | --- |
-| Client | Configuration, single calls, batches, PSR-18 | `src/Client/` | `client-api.md` |
+| ApiClient | Configuration, single calls, batches, PSR-18, exceptions | `src/Client/` | `client-api.md` |
 | Body handling | Encoding, decoding and hydration | `src/Body/` | `body.md` |
-| Results and errors | One result per call, `toWpError()` | `src/Result/` | `results-and-errors.md` |
-| Middleware | Auth, host rules, retry and logging | `src/Middleware/` | `middleware.md` |
-| Transport | One contract, a WordPress and an in-memory version | `src/Transport/` | `transport.md` |
+| Middleware | Retry and logging | `src/Middleware/` | `middleware.md` |
+| Transport | One contract, a WordPress and an in-memory adapter | `src/Transport/` | `transport.md` |
+
+Three groups of shared values travel between them: messages, results and errors, and redaction.
 
 `ApiClient` is a `final` class. A plugin or theme holds one inside its own class and the rest of its code calls that class, as decision 0017 Hold a final client in each plugin or theme records. An SDK or a one-off call may use `ApiClient` directly.
 
 ## Rules
 
-- Each layer knows only the layer below it.
+- Each element knows only the element below it.
 - Only the WordPress transport and `toWpError()` reference WordPress.
 - With no middleware attached, a single call behaves like plain `wp_remote_request()`.
 - Middleware treats a single call as a batch of one.

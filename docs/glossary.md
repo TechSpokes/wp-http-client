@@ -12,7 +12,11 @@ One request inside a batch, identified by its key. Each member has its own argum
 
 ## Result
 
-The outcome for one member: a response, or the exception that explains why there is none. A result set holds the results of a batch under the submitted keys.
+The outcome for one member as calling code sees it: a value or an exception, and either may carry the response. A result set holds the results of a batch under the submitted keys.
+
+## Delivery
+
+What the transport reports for one member: a PSR-7 response, or a failure value with a kind, a message and the site's error code. The client turns deliveries into results.
 
 ## Endpoint
 

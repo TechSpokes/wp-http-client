@@ -6,7 +6,11 @@ All notable changes to this project are documented in this file. The format is b
 
 ### Added
 
-- docs(design): add the design overview, interaction scenarios and the client decision.
+- docs(design): add the design overview, interaction scenarios, architecture and the client decision.
+
+### Changed
+
+- docs(decisions): keep retry, logging and caching as middleware and move auth to the client and host rules to the transport.
 
 ## [0.0.1] - 2026-11-03
 

@@ -140,7 +140,7 @@ A `Transport` interface takes a keyed set of PSR-7 requests and returns keyed re
 
 ### Middleware
 
-Middleware operates on batches, a single request being a batch of one. 1.0 ships retry, logging with redaction, auth injection and a host allow and deny list. Caching is designed as middleware and may ship in 1.1.
+Middleware operates on batches, a single request being a batch of one. 1.0 ships retry and logging with redaction. Auth is applied by the client to the requests it builds, and a host allow and deny list is enforced by the transport on every redirect hop. Caching is designed as middleware and may ship in 1.1.
 
 ### Codecs
 
@@ -200,7 +200,7 @@ Each attempt produces one structured PSR-3 log entry with timing. `Authorization
 
 1. Foundation: PSR-7 and PSR-17 wiring, in-memory transport, codecs, error model, single-request PSR-18 client.
 2. WordPress transport: single-request parity with `wp_remote_request()`, then batch parity.
-3. Middleware: batch-aware retry, logging with redaction, auth, host policy.
+3. Middleware and policy: batch-aware retry, logging with redaction, auth, host rules.
 4. Developer surface: `Endpoint`, `ApiClient`, hydrator, `toWpError()`, and a worked example client.
 5. Streaming: downloads with size caps, multipart uploads.
 6. Release 1.0, then cache and rate-limit middleware in 1.x.
