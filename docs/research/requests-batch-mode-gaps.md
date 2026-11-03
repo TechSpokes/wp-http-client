@@ -4,7 +4,9 @@
 
 ## Sources checked
 
-Read on 2026-11-03 from Requests 2.0.21: `src/Requests.php`, `src/Transport/Curl.php`, `src/Proxy/Http.php`, `src/Cookie/Jar.php` and `src/Auth/Basic.php`. WordPress 7.0 bundles Requests 2.0.17; these files have not yet been re-checked at that version. An earlier TechSpokes batch client already works around the first gap, which confirms it in practice.
+Checked on 2026-11-03 against Requests 2.0.17, the copy bundled with WordPress 7.0 under `wp-includes/Requests/src/`, and Requests 2.0.21, the latest release. All five gaps exist in both. The files read, as paths inside the Requests library, are `src/Requests.php`, `src/Transport/Curl.php`, `src/Proxy/Http.php`, `src/Cookie/Jar.php` and `src/Auth/Basic.php`; they are not files of this package.
+
+An earlier TechSpokes batch client already works around the first gap, which confirms it in practice.
 
 ## What batch mode does support
 
