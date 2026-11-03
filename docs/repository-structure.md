@@ -149,14 +149,10 @@ The "Agent skills" section of the root `AGENTS.md` points Matt Pocock's skills t
 
 His setup skill is not installed, because it writes into `CLAUDE.md`. `bin/install-agent-skills.sh` holds the skill list and the pinned upstream commits and copies the skills into `.agents/skills/` and `.claude/skills/`.
 
-The repository checks workflow fails when the two skill folders differ or when a package archive contains anything outside the allow-list.
+`bin/verify-repository.sh` compares the working skill folders and checks the `HEAD` archive against the runtime allow-list. Local verification and the repository checks workflow share this command; see [CONTRIBUTING.md](../CONTRIBUTING.md#verification) for its use.
 
 ## GitHub settings
 
-Serge sets these once in the repository settings, because a commit cannot:
+Repository settings are managed through GitHub, because a commit cannot set them. The branch, merge, Actions and security policy is in [CONTRIBUTING.md](../CONTRIBUTING.md#repository-settings).
 
-- Protect `main` and require pull requests.
-- Enable private vulnerability reporting.
-- Create the triage labels `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human` and `wontfix`.
-- Create the planning labels `wayfinder:map`, `wayfinder:research`, `wayfinder:prototype`, `wayfinder:grilling` and `wayfinder:task`.
-- Enable GitHub Sponsors display, which reads `.github/FUNDING.yml`.
+The triage and planning labels are listed in [agents/triage-labels.md](agents/triage-labels.md) and [agents/issue-tracker.md](agents/issue-tracker.md). GitHub Sponsors reads `.github/FUNDING.yml`; the wiki and Projects are disabled because documentation and planning use repository files and issues.

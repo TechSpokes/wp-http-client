@@ -4,7 +4,7 @@ An HTTP client for WordPress plugins and themes. It sends every request through 
 
 ## Status
 
-The package is in design. There is no release yet and the public API is not settled.
+The package is in design and the public API is not settled. Version 0.0.1 is a scaffolding prerelease with no runtime implementation or installable Composer package. Its source archives contain only this README, the changelog and license; browse the [tagged repository](https://github.com/TechSpokes/wp-http-client/tree/v0.0.1) for the documentation and development files.
 
 The problem, scope and design decisions are documented in [docs/README.md](docs/README.md). Progress is tracked in [GitHub Issues](https://github.com/TechSpokes/wp-http-client/issues).
 
@@ -15,7 +15,7 @@ The problem, scope and design decisions are documented in [docs/README.md](docs/
 
 ## Installation
 
-The package will be published on Packagist as `techspokes/wp-http-client`. Plugins and themes that bundle it should prefix it with Strauss so that two plugins shipping different versions cannot collide; a guide comes with the first release.
+The package will be published on Packagist as `techspokes/wp-http-client`. Plugins and themes that bundle it should prefix it with Strauss so that two plugins shipping different versions cannot collide; a guide comes with the first runtime release.
 
 ## Design principles
 
